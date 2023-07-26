@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block style %}
+<style>
+
+</style>
+{% endblock style %}
+{% block body %}
+<!-- '':,'':event_gender,'participant_type':  -->
+<div class="container " style="margin-top: 1.4rem;">
+     <h2 class="text-center">Medal Prediction (GOLD /SILVER)</h2>
+     <form method="POST" action="" class="form-group">
+          {% csrf_token %}
+          <label for="discipline_title" class="form-label">Discipline Title:</label>
+          <select id="discipline_title" name="discipline_title" class="form-control" required>
+               <option value="" disabled selected>Select Values</option>
+               {% if discipline_title %}
+               {% for d in discipline_title %}
+               <option>{{ d }}</option>
+               {% endfor %}
+               {% endif %}
+               <!-- Add other options here -->
+          </select>
+
+          <label for="event_gender" class="form-label">Event Gender:</label>
+          <select id="event_gender" name="event_gender" class="form-control" required>
+               <option value="" disabled selected>Select Gender</option>
+               <!-- <option value="Mixed">Mixed</option> -->
+               {% if event_gender%}
+               {% for d in event_gender%}
+               <option>{{ d }}</option>
+               {% endfor %}
+               {% endif %}
+               <!-- Add other options here -->
+          </select>
+
+          <label for="participant_type" class="form-label">Participant Type:</label>
+          <select id="participant_type" name="participant_type" class="form-control" required>
+               <option value="" disabled selected>Select Type</option>
+               <!-- Add other options here -->
+               {% if participant_type%}
+               {% for d in participant_type%}
+               <option>{{ d }}</option>
+               {% endfor %}
+               {% endif %}
+          </select>
+
+          <button type="submit" class="btn btn-primary mt-3">Predict</button>
+     </form>
+</div>
+
+<div class="container">
+     {% if medal_type%}
+     <h1>Congratulations, The <b>{{medal_type}}</b> Medal is Received!!!</h1>
+     {% endif %}
+
+</div>
+
+{% endblock body %}
